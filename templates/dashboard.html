@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <title>CHARLES BOOK CLUB</title>
+ 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+  
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  
+  <div style ='background-color: #c5cddb;'>
+  <div class="container">
+  <br>
+  <div class="p-3 mb-2 bg-info text-white">
+  <div class="row" >
+    <div class="col-sm">
+     
+    </div>
+    <div class="col-sm">
+	<p class="font-weight-bold" align="center" style="font-size:30px" >CHARLES BOOK CLUB</p>
+      
+    </div>
+    <div class="col-sm">
+      
+    </div>
+  </div>
+  </div>
+</div>
+ 
+  <div class="container">
+  <div style ='background-color: #def4f7;' class="card border-primary mb-3" style="max-width: 25rem; border-radius: 30px; font-size:30px" >
+    <form method = "POST"  id="probform">
+		<fieldset class="form-group" >
+		<div style='margin-left:20px'>
+		<br>
+		<br>
+		<div class='row'>
+	   <legend class="col-form-label col-sm-2 pt-0" align="center">Select a file</legend>
+	   <div class="col-sm-10">
+	   <div class="form-group row" align="left">
+				<div class="col-sm-10" >
+				<input class="btn btn-primary"type="file" name="myFile"><br><br>
+				
+				<br>
+				</div>
+		</div>	
+		</div>
+		</div>
+			<hr>
+		 <div class="row">
+			
+			<h5><b >Find Target customer List for a new title</b></h5>
+			<br>
+			<br>
+		 </div>
+		  
+        <div class="row">
+          <legend class="col-form-label col-sm-2 pt-0" align="center">Book Category</legend>
+		 
+          <div class="col-sm-10">
+       
+            <div class="form-check" align="left">
+              <input class="form-check-input" type="radio" name="category" id="category" value="ChildBks" >
+              <label class="form-check-label" for="category" >
+              Child Book
+              </label>
+            </div>
+            <div class="form-check" align="left">
+              <input class="form-check-input" type="radio" name="category" id="category" value="YouthBks">
+              <label class="form-check-label" for="category">
+              Youth Book
+              </label>
+            </div>
+			<div class="form-check" align="left">
+              <input class="form-check-input" type="radio" name="category" id="category" value="CookBks">
+              <label class="form-check-label" for="category">
+              Cook Book
+              </label>
+            </div>
+			<div class="form-check" align="left">
+              <input class="form-check-input" type="radio" name="category" id="category" value="DoItYBks">
+              <label class="form-check-label" for="category">
+              Dolty Book
+              </label>
+            </div>
+			<div class="form-check" align="left">
+              <input class="form-check-input" type="radio" name="category" id="category" value="RefBks">
+              <label class="form-check-label" for="category">
+              Ref Book
+              </label>
+            </div>
+			<div class="form-check" align="left">
+              <input class="form-check-input" type="radio" name="category" id="category" value="Related Purchase">
+              <label class="form-check-label" for="category">
+              History Book
+              </label>
+            </div>
+			
+			
+          </div>
+        </div>
+		
+			<div class="form-group row" align="left">
+				<div class="col-sm-10" >
+				<a href=# id=test><button class="btn btn-primary"   value = "submit" type="button" onclick="submitForm('http://localhost:5000/custList')"">Customer List</button></a>
+				</div>
+			</div>
+			
+			<br>
+		<div class="row">
+			<h5><b >Predict for customer in 4000 sample </b></h5>
+			<br><br>
+	    </div>
+		
+	  
+	   
+
+       <div class="form-group row">
+        <label for="cid" class="col-sm-2 col-form-label" align="center">  Customer ID</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="cid" name="cid">
+          </div>
+       </div>
+		<div class="form-group row" align="left">
+				<div class="col-sm-10" >
+				<a href=# id=test><button class="btn btn-primary"   value = "submit" type="button" onclick="submitForm('http://localhost:5000/viewCustDetails')">View Details</button></a>
+				</div>
+		</div>	
+		
+		<hr>
+		<div class="row">
+			<h5><b >Predict for customer not in 4000 sample </b></h5>
+			<br><br>
+	    </div>
+		<div class="form-group row">
+        <label for="cid" class="col-sm-2 col-form-label" align="center">  Monetary</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="Monetary" name="Monetary">
+          </div>
+       </div>
+	   <div class="form-group row">
+        <label for="cid" class="col-sm-2 col-form-label" align="center">  Recency</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="Recency" name="Recency">
+          </div>
+       </div>
+	   <div class="form-group row">
+        <label for="cid" class="col-sm-2 col-form-label" align="center">  Frequency</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="Frequency" name="Frequency">
+          </div>
+       </div>
+	   
+	   <div class='row'>
+	   <legend class="col-form-label col-sm-2 pt-0" align="center">Gender</legend>
+	   <div class="col-sm-10">
+	   <div class="form-check" align="left">
+              <input class="form-check-input" type="radio" name="gender" id="gender" value="0" >
+              <label class="form-check-label" for="gender" >
+              Male
+              </label>
+        </div>
+		<div class="form-check" align="left">
+              <input class="form-check-input" type="radio" name="gender" id="gender" value="1" >
+              <label class="form-check-label" for="gender" >
+              Female
+              </label>
+        </div>
+		</div>
+		</div>
+		
+		<div class="form-group row">
+        <label for="cid" class="col-sm-2 col-form-label" align="center">  FirstPurch</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="FirstPurch" name="FirstPurch">
+          </div>
+       </div>
+	   
+	   <div class="form-group row">
+        <label for="cid" class="col-sm-2 col-form-label" align="center">  Related Purchase</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="Related Purchase" name="Related Purchase">
+          </div>
+       </div>
+	   <div class="form-group row" align="left">
+				<div class="col-sm-10" >
+				<a href=# id=test><button class="btn btn-primary"   value = "submit" type="button" onclick="submitForm('http://localhost:5000/viewNewPrediction')">View Prediction</button></a>
+				</div>
+		</div>
+
+		
+      </fieldset>
+	  </div>
+	  
+	  
+	</form>
+
+</div>
+    </div>
+    <script>
+	function submitForm(action)
+    {
+        document.getElementById('probform').action = action;
+        document.getElementById('probform').submit();
+		document.getElementById("probform").reset();
+		document.getElementById("myFile").reset(FALSE);
+
+    }
+
+  </script>
+</body>
+ 
+</html>
+
+
+    
