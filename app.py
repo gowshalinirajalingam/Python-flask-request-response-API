@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from flask import jsonify
 import json
-
+from flask_cors import CORS, cross_origin
 import h2o
 
 h2o.init(min_mem_size=8)
@@ -33,34 +33,38 @@ from h2o.utils.typechecks import assert_is_type, is_type
 h2o.no_progress()
 
 app = Flask(__name__)
-
+CORS(app)
 
 # Here the method is not mensioned.That means we r not using any inputs given by user here.
 # @app.route('/')
 # def student():
 #   return render_template('student.html')
-#////////////////////
+#///////////////////
+
+saved_model = h2o.load_model("Grid_XGBoost_py_4_sid_b2ba_model_python_1548333154913_3_model_1")
+
+
 def case1(I, loan, r):
     n = 50 / 4
     # installment is A
     payment = (loan * (r / (12 * 100)) * (((r / (12 * 100)) + 1) ** n)) / ((((r / (12 * 100)) + 1) ** n) - 1)
     disposible = I * 0.9
     if disposible >= payment:
-        return payment
+        return loan
     elif disposible < payment:
-        return disposible * 0.9
+        return ((disposible*0.95*((((r / (12 * 100)) + 1) ** n) - 1))/(r / (12 * 100)) * (((r / (12 * 100)) + 1) ** n))
 
     # district ,lbr , age
 
 
-def case2(monthlyPayable, age):
+def case2(disbloan, age):
     n = 50 / 4
     if age <= 50.0:
-        return monthlyPayable * n
+        return disbloan 
     elif age < 60.0:
-        return monthlyPayable * n * 0.9
+        return disbloan* 0.9
     elif age >= 60.0:
-        return monthlyPayable * n * 0.8
+        return disbloan* 0.8
 
     #  in (3, 6, 34, 47, 54, 55, 62, 67)
 
@@ -78,13 +82,15 @@ def case3(approved_ln_amt, lbr):
 ##Here the method is mensioned.That means we r using any inputs given by user here.
 @app.route('/result', methods=['POST'])
 def JsonHandler():
+	
     # get the built model from training set
-    saved_model = h2o.load_model("Grid_XGBoost_py_4_sid_b12f_model_python_1547186079651_1_model_1")
+  #  saved_model = h2o.load_model("Grid_XGBoost_py_4_sid_bf7f_model_python_1548150766384_1_model_1")
 
     #////////////////////////////////////////////////
 
     #/////////////////////////////////////////////////
     # Get Json object
+    print("api called")
     content = [request.get_json()]
 
     # convert json object to  pandas dataframe
@@ -158,19 +164,19 @@ def cust_grp(approved, applied):
     amount = approved
     if credit_score >= 0.99:
         grp = "A"
-        return {'Customer_Group': grp, 'Credit Score': credit_score, 'Loan Amount': amount}
+        return {'Customer_Group': grp, 'Credit_Score': credit_score, 'Loan_Amount': amount}
     elif credit_score >= 0.7:
         grp = "B"
-        return {'Customer_Group': grp, 'Credit Score': credit_score, 'Loan Amount': amount}
+        return {'Customer_Group': grp, 'Credit_Score': credit_score, 'Loan_Amount': amount}
 
     elif credit_score >= 0.4:
         grp = "C"
-        return {'Customer_Group': grp, 'Credit Score': credit_score, 'Loan Amount': amount}
+        return {'Customer_Group': grp, 'Credit_Score': credit_score, 'Loan_Amount': amount}
 
     elif credit_score < 0.4:
         grp = "D"
-        return {'Customer_Group': grp, 'Credit Score': credit_score, 'Loan Amount': amount}
+        return {'Customer_Group': grp, 'Credit_Score': credit_score, 'Loan_Amount': amount}
 #///////////////////
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='192.168.10.251',port='5000',debug = True)  
